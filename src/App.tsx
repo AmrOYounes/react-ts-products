@@ -1,11 +1,17 @@
-import "./App.css";
+import ProductCard from "./components/ProductCard";
+import { productList } from "./data/index";
 
-function App() {
+const App = () => {
+  const renderProductList = productList.map((product) => (
+    <ProductCard product={product} key={product.id} />
+  ));
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <main className="container">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 ">
+        {renderProductList}
+      </div>
+    </main>
   );
-}
+};
 
 export default App;
