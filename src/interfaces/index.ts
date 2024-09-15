@@ -11,9 +11,16 @@ export interface IProduct {
   };
 }
 
+export interface IInputValdiation {
+  title: string;
+  description: string;
+  imageUrl: string;
+  price: string;
+}
+
 export interface IFormInput {
   id: string;
-  name: string;
+  name: "title" | "description" | "imageUrl" | "price";
   label: string;
   type: string;
 }

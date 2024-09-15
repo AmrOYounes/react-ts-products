@@ -13,7 +13,7 @@ const ProductCard = ({ product }: IProps) => {
       <Image
         imageUrl={imageUrl}
         alt="product image"
-        className="rounded-md mb-2 max-h-96"
+        className="rounded-md mb-2 h-72 object-cover"
       />
       <h3>{title}</h3>
       <p className="mb-4">{textSlicer(description)}</p>
