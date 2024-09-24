@@ -10,6 +10,7 @@ interface IProps {
   indx: number;
   setEditIndex: (value: number) => void;
   setTempColors: (value: string[]) => void;
+  openConfirmDialog: () => void;
 }
 
 const ProductCard = ({
@@ -19,6 +20,7 @@ const ProductCard = ({
   indx,
   setEditIndex,
   setTempColors,
+  openConfirmDialog,
 }: IProps) => {
   const { description, title, imageUrl, category, colors, price } = product;
 
@@ -27,6 +29,11 @@ const ProductCard = ({
     setProductToEdit(product);
     setEditIndex(indx);
     setTempColors(colors);
+  };
+
+  const onRemove = () => {
+    openConfirmDialog();
+    setProductToEdit(product);
   };
   return (
     <div className="container max-w-sm md:max-w-lg mx-auto border rounded-md p-2 flex flex-col">
@@ -60,7 +67,7 @@ const ProductCard = ({
           Edit
         </Button>
 
-        <Button width="w-full" className="bg-red-700">
+        <Button width="w-full" className="bg-red-700" onClick={onRemove}>
           Delete
         </Button>
       </div>

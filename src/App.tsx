@@ -11,6 +11,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import CircleColors from "./components/CircleColors";
 import { v4 as uuid } from "uuid";
 import Select from "./components/ui/Select";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
   const productInitalValue = {
@@ -37,6 +38,8 @@ const App = () => {
   const [productToEdit, setProductToEdit] =
     useState<IProduct>(productInitalValue);
   const [editIndex, setEditIndex] = useState<number>(0);
+  const [isOpenConfirmDialog, setIsOpenConfirmDialog] =
+    useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [errors, setErrors] = useState(errorInitialValue);
@@ -59,11 +62,15 @@ const App = () => {
   };
 
   const openEditModal = () => setIsOpenEditModal(true);
+  const openConfirmModal = () => setIsOpenConfirmDialog(true);
 
   console.log(tempColors);
 
   const openModal = () => {
     setIsOpen(true);
+  };
+  const closeConfirmModal = () => {
+    setIsOpenConfirmDialog(false);
   };
 
   const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -239,6 +246,7 @@ const App = () => {
       indx={index}
       setEditIndex={setEditIndex}
       setTempColors={setTempColors}
+      openConfirmDialog={openConfirmModal}
     />
   ));
 
@@ -260,6 +268,17 @@ const App = () => {
     </span>
   ));
 
+  const handelDeleteProduct = () => {
+    const udpatedProducts = products.filter(
+      (product) => product.id !== productToEdit.id
+    );
+
+    setProducts(udpatedProducts);
+    closeConfirmModal();
+    toast.error("Product has successfuly deleted", {
+      style: { backgroundColor: "red", color: "white" },
+    });
+  };
   const renderProductEdit = (
     id: string,
     label: string,
@@ -383,6 +402,26 @@ const App = () => {
           </div>
         </form>
       </Modal>
+
+      <Modal
+        isOpen={isOpenConfirmDialog}
+        closeModal={closeConfirmModal}
+        title="are you sure you want to deleete this product"
+        discription=" deletete will be perminantly be carful"
+      >
+        <div className="flex  space-x-3">
+          <Button className="bg-[#c2344d]" onClick={handelDeleteProduct}>
+            yes,Rremove
+          </Button>
+          <Button
+            className="bg-[#f5f5fa] text-black"
+            onClick={closeConfirmModal}
+          >
+            cancel
+          </Button>
+        </div>
+      </Modal>
+      <Toaster />
     </main>
   );
 };
