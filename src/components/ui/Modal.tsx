@@ -4,6 +4,7 @@ import {
   Transition,
   DialogTitle,
   TransitionChild,
+  DialogBackdrop,
 } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
 
@@ -19,6 +20,7 @@ const Modal = ({ isOpen, closeModal, title, children }: IProps) => {
     <>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <DialogBackdrop className="fixed inset-0  backdrop-blur-sm" />
           <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
@@ -42,7 +44,7 @@ const Modal = ({ isOpen, closeModal, title, children }: IProps) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <DialogPanel className="w-full max-w-md transform rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
                   {title && (
                     <DialogTitle
                       as="h3"
