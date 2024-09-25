@@ -309,9 +309,13 @@ const App = () => {
 
   return (
     <main className="container">
-      <Button className="bg-black mb-4" onClick={openModal}>
+      <Button
+        className="block mb-3 bg-black max-w-sm mx-auto"
+        onClick={openModal}
+      >
         Add product
       </Button>
+
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 ">
         {renderProductList}
       </div>
